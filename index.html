@@ -316,11 +316,67 @@ dialog{border:1px solid #d6e2e7;border-radius:19px;max-height:calc(100dvh - 40px
  .printSheet .printFoot{border-top:1px solid #bdb09b;margin-top:10px!important;padding-top:6px;font:8pt Georgia,serif!important;color:#776855!important}
 }
 
+
+/* Acabamento editorial — versão publicada. Fichas com hierarquia de notas, não uma grade de painéis. */
+.theme-paper-preview .modalHead{padding:19px 23px 17px;border-bottom:1px solid #d6c3a9;background:linear-gradient(103deg,#fff6df 0%,#f6ebd8 66%,#f9efdf 100%);position:relative}
+.theme-paper-preview #cityDialog{border:1px solid #bcab90;border-radius:5px;box-shadow:8px 11px 0 rgba(65,47,28,.17),0 24px 65px rgba(43,31,19,.26);background:#fffaf0}
+.theme-paper-preview #cityDialog .modalHead::after{content:"";position:absolute;bottom:8px;left:23px;width:82px;height:4px;border-radius:12px;background:#eac875;transform:rotate(-2deg);opacity:.8}
+.theme-paper-preview #cityDialog .modalHead h2{font-family:Georgia,'Times New Roman',serif;font-size:clamp(24px,4vw,32px);letter-spacing:-.035em;line-height:1.2;margin:3px 0 7px;color:#241d17;font-weight:700}
+.theme-paper-preview #cityDialog .overline{font-family:'Courier New',monospace;font-size:10px;letter-spacing:.1em;font-weight:700;color:#73614e}
+.theme-paper-preview #cityDialog .modalBody{padding:18px 23px 23px;background-image:repeating-linear-gradient(0deg,transparent 0,transparent 30px,rgba(122,146,170,.04) 31px,transparent 32px);background-color:#fffbf3}
+.theme-paper-preview .citySectionHeading{display:flex;align-items:center;gap:8px;margin:0 0 11px;color:#544637;font-family:'Segoe Print','Bradley Hand','Comic Sans MS',Georgia,serif;font-size:14px;font-weight:700;line-height:1.2}
+.theme-paper-preview .citySectionHeading small{font:700 9px 'Courier New',monospace;color:#877766;text-transform:uppercase;white-space:nowrap;letter-spacing:.08em}
+.theme-paper-preview .citySectionRule{height:1px;min-width:12px;flex:1;background:repeating-linear-gradient(to right,#c3ad91 0 8px,transparent 8px 13px);opacity:.7}
+.theme-paper-preview .citySectionSecond{margin-top:25px;margin-bottom:12px}
+.theme-paper-preview .infoStats{gap:10px;padding:1px 3px 5px;grid-template-columns:repeat(3,minmax(0,1fr))}
+.theme-paper-preview .infoStat{position:relative;border:1px solid #cbb89b;border-radius:2px;padding:14px 11px 13px;min-height:86px;box-shadow:2px 3px 0 rgba(93,66,30,.11),0 4px 10px rgba(93,66,30,.04);display:flex;flex-direction:column;justify-content:space-between;gap:9px}
+.theme-paper-preview .infoStat:first-child{transform:rotate(-.6deg)}
+.theme-paper-preview .infoStat:nth-child(2){transform:translateY(4px) rotate(.65deg)}
+.theme-paper-preview .infoStat:nth-child(3){transform:rotate(-.3deg)}
+.theme-paper-preview .infoStat::after{content:"";position:absolute;width:9px;height:9px;border-radius:50%;background:rgba(86,70,54,.15);box-shadow:inset 0 0 0 1px rgba(86,70,54,.15);right:9px;top:8px}
+.theme-paper-preview .infoStat strong{font-family:Georgia,serif;font-size:28px;font-weight:700;line-height:1;color:#302417}
+.theme-paper-preview .infoStat span{font-family:Inter,system-ui,sans-serif;font-size:11px;font-weight:720;color:#584b3c;line-height:1.35}
+.theme-paper-preview .facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 22px;margin:0 0 14px;padding:0 2px}
+.theme-paper-preview .fact{display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;gap:7px;min-width:0;min-height:78px;padding:10px 4px 13px 3px;border:0;border-bottom:1px dashed #cbb8a0;border-radius:0;background:transparent!important;box-shadow:none!important;text-align:left}
+.theme-paper-preview .fact span{display:block;color:#8a6c57;font-size:10px;font-weight:790;text-transform:uppercase;letter-spacing:.075em;line-height:1.35}
+.theme-paper-preview .fact strong{color:#28211a;font-family:Georgia,'Times New Roman',serif;font-size:18px;letter-spacing:-.025em;font-weight:700;text-align:left;line-height:1.2;overflow-wrap:break-word;max-width:100%}
+.theme-paper-preview .fact strong small{font-family:Inter,system-ui,sans-serif;font-size:11px;color:#6a5a48;font-weight:600;letter-spacing:0}
+.theme-paper-preview .fact:nth-child(even){padding-left:5px}
+.theme-paper-preview .fact #roadValue{font-family:Inter,system-ui,sans-serif;font-size:15px;line-height:1.4;font-weight:720;letter-spacing:-.01em}
+.theme-paper-preview .citySourceNote{margin:14px 0 15px;padding:0;border:1px solid #e1ceaa;border-left:3px solid #deb972;border-radius:2px;background:#fff6dd;color:#5e5142}
+.theme-paper-preview .citySourceNote summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;font-family:Inter,system-ui,sans-serif;font-size:11px;font-weight:760;color:#665337}
+.theme-paper-preview .citySourceNote summary::-webkit-details-marker{display:none}
+.theme-paper-preview .citySourceNote summary span{font-size:17px;line-height:1;transition:transform .2s}
+.theme-paper-preview .citySourceNote[open] summary span{transform:rotate(45deg)}
+.theme-paper-preview .citySourceNote p{font-size:11px;line-height:1.65;margin:0;padding:0 12px 12px;max-width:65ch}
+.theme-paper-preview #cityDialog .modalActions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.theme-paper-preview #cityDialog .modalActions .button{width:100%;min-height:43px;max-width:none;padding:9px 10px;white-space:normal;text-align:center;font-size:12px}
+.theme-paper-preview #cityDialog #cityMap{grid-column:1/-1;background:#e9eee8;border-color:#b1c4b5}
+.theme-paper-preview #cityDialog #cityFavorite{border:1px dashed #b99d71;background:#fff9e7;color:#554531}
+.theme-paper-preview #cityDialog .modalActions:last-child{margin-top:9px}
+.theme-paper-preview #cityDialog .modalActions:last-child #cityFavorite{grid-column:1/-1}
+@media(max-width:490px){
+ .theme-paper-preview #cityDialog .modalHead{padding:17px 17px 13px}
+ .theme-paper-preview #cityDialog .modalHead::after{left:17px;bottom:5px}
+ .theme-paper-preview #cityDialog .modalBody{padding:16px 16px 17px}
+ .theme-paper-preview .infoStats{gap:8px;padding-inline:0}
+ .theme-paper-preview .infoStat{min-height:80px;padding:13px 9px 11px}
+ .theme-paper-preview .infoStat strong{font-size:24px}
+ .theme-paper-preview .infoStat span{font-size:10px}
+ .theme-paper-preview .facts{gap:4px 14px}
+ .theme-paper-preview .fact{min-height:75px;padding:9px 1px 12px}
+ .theme-paper-preview .fact span{font-size:9px}
+ .theme-paper-preview .fact strong{font-size:16px}
+ .theme-paper-preview .fact #roadValue{font-size:13px}
+}
+@media(max-width:340px){.theme-paper-preview .facts{grid-template-columns:1fr}.theme-paper-preview .fact{min-height:0}.theme-paper-preview .infoStat{padding-inline:7px}}
+@media(prefers-reduced-motion:reduce){.theme-paper-preview .citySourceNote summary span{transition:none}}
+
 </style>
 </head>
 <body class="theme-paper-preview">
 <div class="rainbow"></div>
-<div class="previewNote" role="note">PRÉVIA DE DESIGN 03 · caderno colorido / não publicada</div>
+
 <div class="wrap">
 <header class="masthead">
   <div><div class="eyebrow"><span class="dot"></span>CADERNO DE ESCOLHAS  /  TJRS 2026</div><h1>Escolha de <em>comarcas</em><span class="titleSwoosh" aria-hidden="true"></span></h1><p class="sub">Organize sua ordem de preferência e compare as cidades por população, vagas e localização. O ranking fica salvo no seu dispositivo, sem cadastro.</p></div>
@@ -552,7 +608,7 @@ list.addEventListener('pointercancel',e=>{if(sort&&e.pointerId===sort.pid)stopSo
 list.addEventListener('lostpointercapture',e=>{if(sort&&e.pointerId===sort.pid)stopSort(false)});
 window.addEventListener('blur',()=>stopSort(false));
 // City details, using only supplied official vacancy counts and geocoded reference data.
-function openCity(id){const d=BY_NAME.get(id);if(!d)return;activeCity=id;$('cityTitle').textContent=id;const favor=favorites.has(id);$('cityContent').innerHTML=`<div class="infoStats"><div class="infoStat"><strong>${d.vagas}</strong><span>Vagas totais</span></div><div class="infoStat"><strong>${d.unicaa}</strong><span>Vagas UNICAA</span></div><div class="infoStat"><strong>${d.vagas-d.unicaa}</strong><span>Vagas regulares</span></div></div><div class="facts"><div class="fact"><span>População estimada (IBGE, 2026)</span><strong>${pretty.format(d.pop)} habitantes</strong></div><div class="fact"><span>Posição no seu ranking</span><strong>${order.indexOf(id)+1}ª</strong></div><div class="fact"><span>Difícil provimento</span><strong>${d.dificil?'Sim · gratificação de 15%*':'Não assinalada no anexo'}</strong></div><div class="fact"><span>Até Porto Alegre (de carro)</span><strong id="roadValue">Consultando rota…</strong></div></div><div class="callout">População estimada para 1º de julho de 2026, conforme base oficial do IBGE atualizada em outubro de 2026. Para território e outros indicadores, consulte o IBGE. A distância rodoviária é calculada entre centros municipais por serviço de roteamento e pode variar conforme o trajeto. Sem conexão, consulte a rota pelo Google Maps. *O adicional depende das condições descritas no Anexo II.</div><div class="modalActions"><a class="button primary" target="_blank" rel="noopener noreferrer" href="${ibgeUrl(d)}">Dados do IBGE ↗</a><a class="button" target="_blank" rel="noopener noreferrer" href="${routeUrl(d)}">Ver rota no Maps ↗</a><button class="button" type="button" id="cityMap">Ver no mapa interativo</button></div><div class="modalActions"><button class="button" id="cityFavorite" type="button">${favor?'★ Remover dos favoritos':'☆ Adicionar aos favoritos'}</button></div>`;
+function openCity(id){const d=BY_NAME.get(id);if(!d)return;activeCity=id;$('cityTitle').textContent=id;const favor=favorites.has(id);$('cityContent').innerHTML=`<div class="citySectionHeading"><span>Vagas oferecidas</span><span class="citySectionRule" aria-hidden="true"></span><small>Anexo II</small></div><div class="infoStats"><div class="infoStat"><strong>${d.vagas}</strong><span>Vagas totais</span></div><div class="infoStat"><strong>${d.unicaa}</strong><span>UNICAA</span></div><div class="infoStat"><strong>${d.vagas-d.unicaa}</strong><span>Regulares</span></div></div><div class="citySectionHeading citySectionSecond"><span>Notas da cidade</span><span class="citySectionRule" aria-hidden="true"></span><small>IBGE 2026</small></div><div class="facts"><div class="fact"><span>População estimada</span><strong>${pretty.format(d.pop)} <small>habitantes</small></strong></div><div class="fact"><span>Minha posição</span><strong>${order.indexOf(id)+1}ª <small>no ranking</small></strong></div><div class="fact"><span>Difícil provimento</span><strong>${d.dificil?'Sim · adicional de 15%*':'Não assinalada'}</strong></div><div class="fact"><span>Distância rodoviária até POA</span><strong id="roadValue">Consultando rota…</strong></div></div><details class="callout citySourceNote"><summary>Fontes e observações <span aria-hidden="true">+</span></summary><p>População estimada para 1º de julho de 2026, conforme o IBGE (atualização de outubro de 2026). A distância de carro é consultada entre centros municipais e pode variar de acordo com o percurso. Se não houver conexão, confira o trajeto no Google Maps. *A gratificação depende das condições do Anexo II.</p></details><div class="modalActions"><a class="button primary" target="_blank" rel="noopener noreferrer" href="${ibgeUrl(d)}">Dados do IBGE ↗</a><a class="button" target="_blank" rel="noopener noreferrer" href="${routeUrl(d)}">Ver rota no Maps ↗</a><button class="button" type="button" id="cityMap">Ver no mapa interativo</button></div><div class="modalActions"><button class="button" id="cityFavorite" type="button">${favor?'★ Remover dos favoritos':'☆ Adicionar aos favoritos'}</button></div>`;
 $('cityContent').querySelector('#cityFavorite').onclick=()=>{favorites.has(id)?favorites.delete(id):favorites.add(id);save();draw();openCity(id)};
 $('cityContent').querySelector('#cityMap').onclick=()=>{$('cityDialog').close();openMap(id)};
 if(!$('cityDialog').open)$('cityDialog').showModal();showRoad(d);}
