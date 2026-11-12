@@ -42,7 +42,7 @@ function styles(){
  '<fonts count="9">'+fonts+'</fonts><fills count="10">'+fills+'</fills><borders count="2"><border><left/><right/><top/><bottom/><diagonal/></border>'+border+'</borders>'+
  '<cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="15">'+xfs+'</cellXfs>'+
  '<cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles>'+
- '<dxfs count="3">'+dxf('FFFDE8E8','FF9A3434')+dxf('FFFFF0D3','FF925E1E')+dxf('FFE3F4E9','FF246641')+'</dxfs></styleSheet>';
+ '<dxfs count="3">'+dxf('FF20252C','FFFFFFFF')+dxf('FFDFEEFF','FF1D568A')+dxf('FFE3F4E9','FF246641')+'</dxfs></styleSheet>';
 }
 function worksheet(order,favorites,byName){
  const first=7,last=first+order.length-1;
@@ -62,7 +62,7 @@ function worksheet(order,favorites,byName){
    numberCell('C'+r,d.vagas,num)+
    '<c r="D'+r+'" s="11"/>'+
    formulaCell('E'+r,'IF(D'+r+'="","",MAX(0,C'+r+'-D'+r+'))',12)+
-   formulaCell('F'+r,'IF(D'+r+'="","A CONFERIR",IF(E'+r+'=0,"ESGOTADA",IF(D'+r+'>0,"PARCIAL","DISPONÍVEL")))',13,true)+
+   formulaCell('F'+r,'IF(D'+r+'="","DISPONÍVEL",IF(E'+r+'=0,"ESGOTADA",IF(D'+r+'>0,"PARCIAL","DISPONÍVEL")))',13,true)+
    numberCell('G'+r,d.unicaa,num)+strCell('H'+r,d.dificil?'Sim':'—',tx)+
    strCell('I'+r,favorites.has(name)?'★':'',num)+'</row>';
  }).join('');
