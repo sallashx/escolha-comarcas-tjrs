@@ -36,7 +36,7 @@ function styles(){
  const fonts=[font(11,colors.ink),font(19,colors.white,true),font(10,colors.white),font(9,colors.teal,true),font(17,colors.navy,true),font(10,colors.ink),font(10,colors.white,true),font(10,colors.ink),font(10,colors.teal,true),font(10,colors.availableInk,true)].join('');
  const fills=['<fill><patternFill patternType="none"/></fill>','<fill><patternFill patternType="gray125"/></fill>',fill(colors.navy),fill(colors.teal),fill(colors.pale),fill(colors.gold),fill(colors.white),fill(colors.stripe),fill(colors.blue),fill(colors.note),fill(colors.available)].join('');
  const border='<border><left style="thin"><color rgb="FFDCE5EA"/></left><right style="thin"><color rgb="FFDCE5EA"/></right><top style="thin"><color rgb="FFDCE5EA"/></top><bottom style="thin"><color rgb="FFDCE5EA"/></bottom><diagonal/></border>';
- const xfs=[xf(0,0),xf(1,2,0,'left'),xf(2,2,0,'left'),xf(3,4),xf(4,4),xf(5,9,0,'left'),xf(6,3),xf(9,10,1,'left'),xf(9,10,1,'left'),xf(9,10,1),xf(9,10,1),xf(9,5,1),xf(9,10,1),xf(9,10,1),xf(9,10,1,'left')].join('');
+ const xfs=[xf(0,0),xf(1,2,0,'left'),xf(2,2,0,'left'),xf(3,4),xf(4,4),xf(5,9,0,'left'),xf(6,3),xf(9,10,1,'left'),xf(9,10,1,'left'),xf(9,10,1),xf(9,10,1),xf(9,10,1),xf(9,10,1),xf(9,10,1),xf(9,10,1,'left')].join('');
  const dxf=(bg,fg)=>'<dxf><font><color rgb="'+fg+'"/></font><fill><patternFill patternType="solid"><fgColor rgb="'+bg+'"/><bgColor indexed="64"/></patternFill></fill></dxf>';
  return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="'+NS+'">'+
  '<fonts count="10">'+fonts+'</fonts><fills count="11">'+fills+'</fills><borders count="2"><border><left/><right/><top/><bottom/><diagonal/></border>'+border+'</borders>'+
@@ -61,7 +61,7 @@ function worksheet(order,favorites,byName){
    numberCell('A'+r,i+1,num)+strCell('B'+r,name,(favorites.has(name)?14:tx))+
    numberCell('C'+r,d.vagas,num)+
    '<c r="D'+r+'" s="11"/>'+
-   formulaCell('E'+r,'IF(D'+r+'="","",MAX(0,C'+r+'-D'+r+'))',12)+
+   formulaCell('E'+r,'IF(D'+r+'="",C'+r+',MAX(0,C'+r+'-D'+r+'))',12)+
    formulaCell('F'+r,'IF(D'+r+'="","DISPONÍVEL",IF(D'+r+'>=C'+r+',"ESGOTADA",IF(D'+r+'>0,"PARCIAL","DISPONÍVEL")))',13,true)+
    numberCell('G'+r,d.unicaa,num)+strCell('H'+r,d.dificil?'Sim':'—',tx)+
    strCell('I'+r,favorites.has(name)?'★':'',num)+'</row>';
