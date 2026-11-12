@@ -395,7 +395,7 @@ dialog{border:1px solid #d6e2e7;border-radius:19px;max-height:calc(100dvh - 40px
  <div class="actionsbar"><span class="count" id="resultText">69 comarcas · ordem editável</span>
   <div class="buttons"><button id="openMap" class="button soft" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3zM9 3v15m6-12v15"/></svg>Mapa interativo</button>
   <button id="shareTop" class="button primary" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M8 12h9M13 8l4 4-4 4"/><rect x="3" y="3" width="18" height="18" rx="3"/></svg>Compartilhar top 10</button>
-  <button id="exportCsv" class="button" type="button">Excel (CSV)</button><button id="print" class="button" type="button">PDF / Imprimir</button>
+  <button id="exportCsv" class="button" type="button">Excel (.xlsx)</button><button id="print" class="button" type="button">PDF / Imprimir</button>
   <div class="menuholder" id="menuholder"><button id="optionsBtn" class="button" type="button" aria-expanded="false" aria-controls="morePop">Mais opções <span aria-hidden="true">⌄</span></button><div class="more-pop hidden" id="morePop">
    <button id="saveJson">Salvar minha ordem (JSON)</button><button id="loadJson">Carregar ordem salva (JSON)</button><button id="savePng">Baixar imagem do top 10 (PNG)</button><button id="copyLink">Copiar link do site</button><button id="reset" class="danger">Restaurar ordem inicial</button><p>Seu ranking é salvo automaticamente neste navegador.</p>
   </div></div></div>
@@ -654,15 +654,7 @@ function download(data,filename,type){const blob=data instanceof Blob?data:new B
 async function copyText(str){try{await navigator.clipboard.writeText(str);return true}catch(err){const el=document.createElement('textarea');el.value=str;el.style.position='fixed';el.style.opacity='0';document.body.appendChild(el);el.select();let ok=false;try{ok=document.execCommand('copy')}catch(_){}el.remove();return ok}}
 const shareText=()=>`Minha ordem de comarcas — TJRS 2026\n\n${order.slice(0,10).map((n,i)=>`${i+1}. ${n}`).join('\n')}\n\nRanking pessoal, não oficial.`;
 $('shareTop').onclick=async()=>{if(navigator.share){try{await navigator.share({title:'Meu top 10 de comarcas',text:shareText()});return}catch(err){if(err.name==='AbortError')return}}const ok=await copyText(shareText());notify(ok?'Top 10 copiado! Cole no WhatsApp.':'Não foi possível copiar. Use a imagem do top 10.')} ;
-$('exportCsv').onclick=()=>{
- const rows=[['Posição','Comarca','Vagas totais','Vagas UNICAA','Vagas regulares','Difícil provimento (+15%)','Favorita'],...order.map((n,i)=>{const d=BY_NAME.get(n);return[i+1,n,d.vagas,d.unicaa,d.vagas-d.unicaa,d.dificil?'Sim':'Não',favorites.has(n)?'Sim':'Não']})];
- // Excel on Windows handles UTF-16LE tab-separated text reliably, including Portuguese accents.
- const tsv=rows.map(row=>row.map(v=>{const s=String(v);return /[\t\r\n"]/.test(s)?'"'+s.replaceAll('"','""')+'"':s}).join('\t')).join('\r\n');
- const bytes=new Uint8Array(2+tsv.length*2);bytes[0]=0xff;bytes[1]=0xfe;
- for(let i=0;i<tsv.length;i++){const n=tsv.charCodeAt(i);bytes[2+i*2]=n&255;bytes[3+i*2]=n>>8;}
- download(new Blob([bytes],{type:'text/tab-separated-values;charset=utf-16le'}),'comarcas_tjrs_2026_excel.tsv','text/tab-separated-values;charset=utf-16le');
- notify('Planilha para Excel salva, com acentos corrigidos.');
-};
+$('exportCsv').onclick=()=>{try{if(typeof window.exportComarcasXlsx!=='function')throw Error('O módulo de Excel ainda não carregou. Atualize a página.');window.exportComarcasXlsx({order,favorites,byName:BY_NAME,download});notify('Excel (.xlsx) salvo para acompanhamento da audiência.')}catch(err){console.error(err);notify('Não foi possível gerar o Excel. Atualize a página e tente novamente.')}};
 $('optionsBtn').onclick=()=>{const open=$('morePop').classList.toggle('hidden')===false;$('optionsBtn').setAttribute('aria-expanded',String(open))};function closeMenu(){$('morePop').classList.add('hidden');$('optionsBtn').setAttribute('aria-expanded','false')}
 document.addEventListener('click',e=>{if(!$('menuholder').contains(e.target))closeMenu()});
 $('saveJson').onclick=()=>{download(JSON.stringify({app:'Escolha de Comarcas TJRS 2026',version:4,order,favorites:[...favorites],exportedAt:new Date().toISOString()},null,2),'minha_ordem_comarcas_tjrs.json','application/json');closeMenu();notify('Ordem salva em arquivo JSON.');};
@@ -722,4 +714,5 @@ $('savePng').onclick=async()=>{closeMenu();try{const blob=await imagePng();if(!b
 $('totalSedes').textContent=SIZE;$('totalVagas').textContent=SEDES.reduce((a,d)=>a+d.vagas,0);$('totalUnicaa').textContent=SEDES.reduce((a,d)=>a+d.unicaa,0);$('totalDificil').textContent=SEDES.filter(d=>d.dificil).length;
 load();draw();
 </script>
+<script src="excel-export.js"></script>
 </body></html>
