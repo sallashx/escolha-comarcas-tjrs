@@ -654,7 +654,15 @@ function download(data,filename,type){const blob=data instanceof Blob?data:new B
 async function copyText(str){try{await navigator.clipboard.writeText(str);return true}catch(err){const el=document.createElement('textarea');el.value=str;el.style.position='fixed';el.style.opacity='0';document.body.appendChild(el);el.select();let ok=false;try{ok=document.execCommand('copy')}catch(_){}el.remove();return ok}}
 const shareText=()=>`Minha ordem de comarcas — TJRS 2026\n\n${order.slice(0,10).map((n,i)=>`${i+1}. ${n}`).join('\n')}\n\nRanking pessoal, não oficial.`;
 $('shareTop').onclick=async()=>{if(navigator.share){try{await navigator.share({title:'Meu top 10 de comarcas',text:shareText()});return}catch(err){if(err.name==='AbortError')return}}const ok=await copyText(shareText());notify(ok?'Top 10 copiado! Cole no WhatsApp.':'Não foi possível copiar. Use a imagem do top 10.')} ;
-$('exportCsv').onclick=()=>{const rows=[['Posição','Comarca','Vagas totais','Vagas UNICAA','Vagas regulares','Difícil provimento (+15%)','Favorita','População estimada (IBGE 2026)','IBGE'],...order.map((n,i)=>{const d=BY_NAME.get(n);return[i+1,n,d.vagas,d.unicaa,d.vagas-d.unicaa,d.dificil?'Sim':'Não',favorites.has(n)?'Sim':'Não',d.pop,ibgeUrl(d)]})];const csv='sep=;\r\n'+rows.map(row=>row.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(';')).join('\r\n');download('\ufeff'+csv,'comarcas_tjrs_2026_excel.csv','text/csv;charset=utf-8');notify('Arquivo para Excel salvo.');};
+$('exportCsv').onclick=()=>{
+ const rows=[['Posição','Comarca','Vagas totais','Vagas UNICAA','Vagas regulares','Difícil provimento (+15%)','Favorita'],...order.map((n,i)=>{const d=BY_NAME.get(n);return[i+1,n,d.vagas,d.unicaa,d.vagas-d.unicaa,d.dificil?'Sim':'Não',favorites.has(n)?'Sim':'Não']})];
+ // Excel on Windows handles UTF-16LE tab-separated text reliably, including Portuguese accents.
+ const tsv=rows.map(row=>row.map(v=>{const s=String(v);return /[\t\r\n"]/.test(s)?'"'+s.replaceAll('"','""')+'"':s}).join('\t')).join('\r\n');
+ const bytes=new Uint8Array(2+tsv.length*2);bytes[0]=0xff;bytes[1]=0xfe;
+ for(let i=0;i<tsv.length;i++){const n=tsv.charCodeAt(i);bytes[2+i*2]=n&255;bytes[3+i*2]=n>>8;}
+ download(new Blob([bytes],{type:'text/tab-separated-values;charset=utf-16le'}),'comarcas_tjrs_2026_excel.tsv','text/tab-separated-values;charset=utf-16le');
+ notify('Planilha para Excel salva, com acentos corrigidos.');
+};
 $('optionsBtn').onclick=()=>{const open=$('morePop').classList.toggle('hidden')===false;$('optionsBtn').setAttribute('aria-expanded',String(open))};function closeMenu(){$('morePop').classList.add('hidden');$('optionsBtn').setAttribute('aria-expanded','false')}
 document.addEventListener('click',e=>{if(!$('menuholder').contains(e.target))closeMenu()});
 $('saveJson').onclick=()=>{download(JSON.stringify({app:'Escolha de Comarcas TJRS 2026',version:4,order,favorites:[...favorites],exportedAt:new Date().toISOString()},null,2),'minha_ordem_comarcas_tjrs.json','application/json');closeMenu();notify('Ordem salva em arquivo JSON.');};
