@@ -37,7 +37,7 @@ function styles(){
  const fills=['<fill><patternFill patternType="none"/></fill>','<fill><patternFill patternType="gray125"/></fill>',fill(colors.navy),fill(colors.teal),fill(colors.pale),fill(colors.gold),fill(colors.white),fill(colors.stripe),fill(colors.blue),fill(colors.note),fill(colors.available)].join('');
  const border='<border><left style="thin"><color rgb="FFDCE5EA"/></left><right style="thin"><color rgb="FFDCE5EA"/></right><top style="thin"><color rgb="FFDCE5EA"/></top><bottom style="thin"><color rgb="FFDCE5EA"/></bottom><diagonal/></border>';
  const xfs=[xf(0,0),xf(1,2,0,'left'),xf(2,2,0,'left'),xf(3,4),xf(4,4),xf(5,9,0,'left'),xf(6,3),xf(9,10,1,'left'),xf(9,10,1,'left'),xf(9,10,1),xf(9,10,1),xf(9,10,1),xf(9,10,1),xf(9,10,1),xf(9,10,1,'left')].join('');
- const dxf=(bg,fg)=>'<dxf><font><color rgb="'+fg+'"/></font><fill><patternFill patternType="solid"><fgColor rgb="'+bg+'"/><bgColor indexed="64"/></patternFill></fill></dxf>';
+ const dxf=(bg,fg)=>'<dxf><font><color rgb="'+fg+'"/></font><fill><patternFill patternType="solid"><fgColor rgb="'+bg+'"/><bgColor rgb="'+bg+'"/></patternFill></fill></dxf>';
  return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="'+NS+'">'+
  '<fonts count="10">'+fonts+'</fonts><fills count="11">'+fills+'</fills><borders count="2"><border><left/><right/><top/><bottom/><diagonal/></border>'+border+'</borders>'+
  '<cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="15">'+xfs+'</cellXfs>'+
