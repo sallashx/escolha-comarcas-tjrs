@@ -72,7 +72,7 @@ function worksheet(order,favorites,byName){
  // Blank / zero = the green base style. Only positive numeric values trigger an override.
  const format='<conditionalFormatting sqref="A'+first+':I'+last+'">'+
  '<cfRule type="expression" dxfId="0" priority="1" stopIfTrue="1"><formula>AND(ISNUMBER($D'+first+'),$D'+first+'>=1,$D'+first+'>=$C'+first+')</formula></cfRule>'+
- '<cfRule type="expression" dxfId="1" priority="2" stopIfTrue="1"><formula>AND(ISNUMBER($D'+first+'),$D'+first+'>0,$D'+first+'<$C'+first+')</formula></cfRule>'+
+ '<cfRule type="expression" dxfId="1" priority="2" stopIfTrue="1"><formula>AND(ISNUMBER($D'+first+'),$D'+first+'>0,$D'+first+'&lt;$C'+first+')</formula></cfRule>'+
  '</conditionalFormatting>';
  return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="'+NS+'">'+
  '<dimension ref="A1:I'+last+'"/><sheetViews><sheetView showGridLines="0" workbookViewId="0"><pane ySplit="6" topLeftCell="A7" activePane="bottomLeft" state="frozen"/><selection pane="bottomLeft" activeCell="D7" sqref="D7"/></sheetView></sheetViews>'+
