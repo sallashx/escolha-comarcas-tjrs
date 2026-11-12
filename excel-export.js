@@ -32,26 +32,26 @@ function styles(){
  const fill=c=>'<fill><patternFill patternType="solid"><fgColor rgb="'+c+'"/><bgColor indexed="64"/></patternFill></fill>';
  const alignment=(kind='center')=>'<alignment horizontal="'+kind+'" vertical="center" wrapText="1"/>';
  const xf=(fontId,fillId,borderId=0,kind='center')=>'<xf numFmtId="0" fontId="'+fontId+'" fillId="'+fillId+'" borderId="'+borderId+'" xfId="0" applyFont="1" applyFill="1" applyBorder="1" applyAlignment="1">'+alignment(kind)+'</xf>';
- const colors={navy:'FF1D3447',teal:'FF0A6A6B',pale:'FFE6F3F1',ink:'FF2B3E4C',white:'FFFFFFFF',stripe:'FFF7FAFC',gold:'FFFFF0C9',blue:'FFEAF2F8',note:'FFFFF5DF'};
- const fonts=[font(11,colors.ink),font(19,colors.white,true),font(10,colors.white),font(9,colors.teal,true),font(17,colors.navy,true),font(10,colors.ink),font(10,colors.white,true),font(10,colors.ink),font(10,colors.teal,true)].join('');
- const fills=['<fill><patternFill patternType="none"/></fill>','<fill><patternFill patternType="gray125"/></fill>',fill(colors.navy),fill(colors.teal),fill(colors.pale),fill(colors.gold),fill(colors.white),fill(colors.stripe),fill(colors.blue),fill(colors.note)].join('');
+ const colors={navy:'FF1D3447',teal:'FF0A6A6B',pale:'FFE6F3F1',ink:'FF2B3E4C',white:'FFFFFFFF',stripe:'FFF7FAFC',gold:'FFFFF0C9',blue:'FFEAF2F8',note:'FFFFF5DF',available:'FFE3F4E9',availableInk:'FF246641'};
+ const fonts=[font(11,colors.ink),font(19,colors.white,true),font(10,colors.white),font(9,colors.teal,true),font(17,colors.navy,true),font(10,colors.ink),font(10,colors.white,true),font(10,colors.ink),font(10,colors.teal,true),font(10,colors.availableInk,true)].join('');
+ const fills=['<fill><patternFill patternType="none"/></fill>','<fill><patternFill patternType="gray125"/></fill>',fill(colors.navy),fill(colors.teal),fill(colors.pale),fill(colors.gold),fill(colors.white),fill(colors.stripe),fill(colors.blue),fill(colors.note),fill(colors.available)].join('');
  const border='<border><left style="thin"><color rgb="FFDCE5EA"/></left><right style="thin"><color rgb="FFDCE5EA"/></right><top style="thin"><color rgb="FFDCE5EA"/></top><bottom style="thin"><color rgb="FFDCE5EA"/></bottom><diagonal/></border>';
- const xfs=[xf(0,0),xf(1,2,0,'left'),xf(2,2,0,'left'),xf(3,4),xf(4,4),xf(5,9,0,'left'),xf(6,3),xf(7,6,1,'left'),xf(7,7,1,'left'),xf(7,6,1),xf(7,7,1),xf(7,5,1),xf(8,8,1),xf(7,8,1),xf(8,4,1,'left')].join('');
+ const xfs=[xf(0,0),xf(1,2,0,'left'),xf(2,2,0,'left'),xf(3,4),xf(4,4),xf(5,9,0,'left'),xf(6,3),xf(9,10,1,'left'),xf(9,10,1,'left'),xf(9,10,1),xf(9,10,1),xf(9,5,1),xf(9,10,1),xf(9,10,1),xf(9,10,1,'left')].join('');
  const dxf=(bg,fg)=>'<dxf><font><color rgb="'+fg+'"/></font><fill><patternFill patternType="solid"><fgColor rgb="'+bg+'"/><bgColor indexed="64"/></patternFill></fill></dxf>';
  return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="'+NS+'">'+
- '<fonts count="9">'+fonts+'</fonts><fills count="10">'+fills+'</fills><borders count="2"><border><left/><right/><top/><bottom/><diagonal/></border>'+border+'</borders>'+
+ '<fonts count="10">'+fonts+'</fonts><fills count="11">'+fills+'</fills><borders count="2"><border><left/><right/><top/><bottom/><diagonal/></border>'+border+'</borders>'+
  '<cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="15">'+xfs+'</cellXfs>'+
  '<cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles>'+
- '<dxfs count="3">'+dxf('FF20252C','FFFFFFFF')+dxf('FFDFEEFF','FF1D568A')+dxf('FFE3F4E9','FF246641')+'</dxfs></styleSheet>';
+ '<dxfs count="2">'+dxf('FF20252C','FFFFFFFF')+dxf('FFDFEEFF','FF1D568A')+'</dxfs></styleSheet>';
 }
 function worksheet(order,favorites,byName){
  const first=7,last=first+order.length-1;
  const meta=[
  '<row r="1" ht="39" customHeight="1">'+strCell('A1','TJRS 2026  |  ACOMPANHAMENTO DE VAGAS',1)+'</row>',
  '<row r="2" ht="25" customHeight="1">'+strCell('A2','Minha ordem de comarcas · quadro pessoal para preencher durante a escolha',2)+'</row>',
- '<row r="3" ht="26" customHeight="1">'+strCell('A3','VAGAS INICIAIS',3)+strCell('C3','ESCOLHIDAS (REGISTRADAS)',3)+strCell('E3','RESTANTES (CONFERIDAS)',3)+strCell('G3','COMARCAS A CONFERIR',3)+'</row>',
+ '<row r="3" ht="26" customHeight="1">'+strCell('A3','VAGAS INICIAIS',3)+strCell('C3','ESCOLHIDAS (REGISTRADAS)',3)+strCell('E3','RESTANTES (CONFERIDAS)',3)+strCell('G3','SEM ATUALIZAÇÃO',3)+'</row>',
  '<row r="4" ht="42" customHeight="1">'+formulaCell('A4','SUM(C'+first+':C'+last+')',4)+formulaCell('C4','SUM(D'+first+':D'+last+')',4)+formulaCell('E4','SUM(E'+first+':E'+last+')',4)+formulaCell('G4','COUNTBLANK(D'+first+':D'+last+')',4)+'</row>',
- '<row r="5" ht="33" customHeight="1">'+strCell('A5','Preencha SOMENTE a coluna amarela “Escolhidas” (0 se nenhuma). Restantes e Situação são automáticas. Dados não conferidos ficam em branco.',5)+'</row>',
+ '<row r="5" ht="33" customHeight="1">'+strCell('A5','Todas começam DISPONÍVEIS. Informe 0 se nenhuma vaga foi escolhida; 1 ou mais para registrar ocupações. Azul = parcial · Preto = esgotada.',5)+'</row>',
  '<row r="6" ht="31" customHeight="1">'+
  ['Pos.','Comarca','Vagas totais','Escolhidas ✎','Restantes','Situação','UNICAA','+15%','Favorita'].map((t,i)=>strCell(String.fromCharCode(65+i)+'6',t,6)).join('')+'</row>'
  ];
@@ -62,16 +62,17 @@ function worksheet(order,favorites,byName){
    numberCell('C'+r,d.vagas,num)+
    '<c r="D'+r+'" s="11"/>'+
    formulaCell('E'+r,'IF(D'+r+'="","",MAX(0,C'+r+'-D'+r+'))',12)+
-   formulaCell('F'+r,'IF(D'+r+'="","DISPONÍVEL",IF(E'+r+'=0,"ESGOTADA",IF(D'+r+'>0,"PARCIAL","DISPONÍVEL")))',13,true)+
+   formulaCell('F'+r,'IF(D'+r+'="","DISPONÍVEL",IF(D'+r+'>=C'+r+',"ESGOTADA",IF(D'+r+'>0,"PARCIAL","DISPONÍVEL")))',13,true)+
    numberCell('G'+r,d.unicaa,num)+strCell('H'+r,d.dificil?'Sim':'—',tx)+
    strCell('I'+r,favorites.has(name)?'★':'',num)+'</row>';
  }).join('');
  const columns=[8,32,14,17,15,20,13,11,12].map((w,i)=>'<col min="'+(i+1)+'" max="'+(i+1)+'" width="'+w+'" customWidth="1"/>').join('');
  const merge=['A1:I1','A2:I2','A3:B3','C3:D3','E3:F3','G3:I3','A4:B4','C4:D4','E4:F4','G4:I4','A5:I5'];
+ // Use numeric inputs, not the calculated status text, to drive row colors.
+ // Blank / zero = the green base style. Only positive numeric values trigger an override.
  const format='<conditionalFormatting sqref="A'+first+':I'+last+'">'+
- '<cfRule type="expression" dxfId="0" priority="1"><formula>$F'+first+'="ESGOTADA"</formula></cfRule>'+
- '<cfRule type="expression" dxfId="1" priority="2"><formula>$F'+first+'="PARCIAL"</formula></cfRule>'+
- '<cfRule type="expression" dxfId="2" priority="3"><formula>$F'+first+'="DISPONÍVEL"</formula></cfRule>'+
+ '<cfRule type="expression" dxfId="0" priority="1" stopIfTrue="1"><formula>AND(ISNUMBER($D'+first+'),$D'+first+'>=1,$D'+first+'>=$C'+first+')</formula></cfRule>'+
+ '<cfRule type="expression" dxfId="1" priority="2" stopIfTrue="1"><formula>AND(ISNUMBER($D'+first+'),$D'+first+'>0,$D'+first+'<$C'+first+')</formula></cfRule>'+
  '</conditionalFormatting>';
  return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="'+NS+'">'+
  '<dimension ref="A1:I'+last+'"/><sheetViews><sheetView showGridLines="0" workbookViewId="0"><pane ySplit="6" topLeftCell="A7" activePane="bottomLeft" state="frozen"/><selection pane="bottomLeft" activeCell="D7" sqref="D7"/></sheetView></sheetViews>'+
