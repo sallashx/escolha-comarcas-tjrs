@@ -76,8 +76,8 @@ function worksheet(order,favorites,byName){
  return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="'+NS+'">'+
  '<dimension ref="A1:I'+last+'"/><sheetViews><sheetView showGridLines="0" workbookViewId="0"><pane ySplit="6" topLeftCell="A7" activePane="bottomLeft" state="frozen"/><selection pane="bottomLeft" activeCell="D7" sqref="D7"/></sheetView></sheetViews>'+
  '<sheetFormatPr defaultRowHeight="20"/><cols>'+columns+'</cols><sheetData>'+meta.join('')+rows+'</sheetData>'+
- '<mergeCells count="'+merge.length+'">'+merge.map(ref=>'<mergeCell ref="'+ref+'"/>').join('')+'</mergeCells>'+
- '<autoFilter ref="A6:I'+last+'"/>'+format+
+ '<autoFilter ref="A6:I'+last+'"/>'+
+ '<mergeCells count="'+merge.length+'">'+merge.map(ref=>'<mergeCell ref="'+ref+'"/>').join('')+'</mergeCells>'+format+
  '<dataValidations count="1"><dataValidation type="whole" operator="between" allowBlank="1" showErrorMessage="1" errorTitle="Quantidade inválida" error="Informe um número entre 0 e o total de vagas." sqref="D'+first+':D'+last+'"><formula1>0</formula1><formula2>C'+first+'</formula2></dataValidation></dataValidations>'+
  '<printOptions horizontalCentered="1"/><pageMargins left="0.25" right="0.25" top="0.45" bottom="0.45" header="0.2" footer="0.2"/><pageSetup orientation="landscape" paperSize="9" fitToWidth="1"/>'+
  '</worksheet>';
